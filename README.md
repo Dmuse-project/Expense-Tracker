@@ -5,7 +5,7 @@ A simple and responsive **Expense Tracker** built with **React.js** that helps y
 ---
 
 ## 📸 Screenshots
-(Add screenshots of your app UI here)
+
 ![alt text](msedge_aKdeUr1N0e.png)
 
 ---
@@ -29,4 +29,4 @@ A simple and responsive **Expense Tracker** built with **React.js** that helps y
 ## 🔧 Installation & Setup
 1. Clone this repository:
    ```bash
-   git clone https://github.com/yourusername/expense-tracker.git
+   git clone https://github.com/Dmuse-project/Expense-Tracker.git
