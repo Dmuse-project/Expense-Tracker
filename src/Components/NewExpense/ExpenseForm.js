@@ -1,25 +1,49 @@
 import { useState } from "react";
 import "./ExpenseForm.css";
+import Error from "../UI/Error";
 
 const ExpenseForm = (props) => {
     const [title, setTitle]= useState("")
     const [amount, setAmount]= useState("")
     const [date, setDate]= useState("")
+    const [error, setError] = useState(null)
+  
 
     const titleHandler = (e) => {
+      if(e.target.value.trim().length === 0){
+        
+      }
+
         setTitle(e.target.value)
+      
     }
     const amountHandler = (e) => {
+        if(e.target.value.trim().length === 0){
+      
+      }
         setAmount(e.target.value)
+     
+         
     }
     const dateHandler = (e) => {
+           if(e.target.value.trim().length === 0){
+        
+    
+      }
         setDate(e.target.value)
+     
     }
 
     const submitHandler = (e) => {
         e.preventDefault()
         if(title.trim().length === 0 || amount.trim().length === 0 || date.trim().length === 0){
-            return <h1>Empty Input. All Input must be filed.</h1>
+           setError({title:"Empty Fields!", message:"All fields must contain a value"})
+          return 
+        }
+
+        if(+amount < 1){
+            setError({title:"Invalid amount!", message:"Amount must be greater than one."})
+          return 
         }
         const expenseData = {
             title:title,
@@ -36,17 +60,22 @@ const ExpenseForm = (props) => {
 
     }
 
+    const errorHandler = () => {
+      setError(null)
+    }
 
 
-  return (
+
+  return (<>
+     {error && <Error title={error.title} message={error.message} onConfirm={errorHandler}/> }
     <form onSubmit={submitHandler}>
       <div className="new-expense__controls">
         <div className="new-expense__control">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="title" className="label">Title </label>
           <input id="title" type="text" value={title} onChange={titleHandler} />
         </div>
         <div className="new-expense__control">
-          <label htmlFor="amount">Amount</label>
+          <label htmlFor="amount" className="label">Amount  </label>
           <input
             id="amount"
             type="number"
@@ -57,7 +86,7 @@ const ExpenseForm = (props) => {
           />
         </div>
         <div className="new-expense__control">
-          <label htmlFor="date">Date</label>
+          <label htmlFor="date"className="label">Date </label>
           <input id="date" type="date" value={date} onChange={dateHandler} min="2025-01-01" max="2030-12-12" />
         </div>
 
@@ -69,6 +98,9 @@ const ExpenseForm = (props) => {
         </div>
       </div>
     </form>
+  </>
+
+ 
   );
 };
 
